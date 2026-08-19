@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BukatanaHUB — Overview</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Bukatana<span>HUB</span></div>
+  <nav>
+    <a href="index.html">Log</a>
+    <a href="overview.html" class="active">Overview</a>
+    <button id="settingsBtn" class="icon-btn" title="Data source settings" type="button">⚙</button>
+  </nav>
+</header>
+
+<main class="page">
+  <p id="loadingMsg" class="muted">Loading data…</p>
+
+  <div id="dashboard" class="hidden">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Cash on Hand</div>
+        <div class="stat-value" id="statTotalCash">—</div>
+      </div>
+      <div class="stat-card in">
+        <div class="stat-label">Cash In — This Month</div>
+        <div class="stat-value" id="statInMonth">—</div>
+      </div>
+      <div class="stat-card out">
+        <div class="stat-label">Cash Out — This Month</div>
+        <div class="stat-value" id="statOutMonth">—</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <h2>Balance per Person</h2>
+      <p class="muted">Positive = still holding company cash. Negative = company owes them.</p>
+      <div id="balanceGrid" class="balance-grid"></div>
+    </section>
+
+    <section class="card">
+      <h2>Cash Out by Category, per Month</h2>
+      <canvas id="categoryChart" height="110"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>Cash Used per Event</h2>
+      <div id="eventList"></div>
+    </section>
+  </div>
+</main>
+
+<dialog id="settingsDialog">
+  <form id="settingsForm">
+    <h3>Connect your Google Sheet</h3>
+    <p class="muted">Paste the Web App URL from your Apps Script deployment (see README).</p>
+    <input type="url" id="apiUrlInput" placeholder="https://script.google.com/macros/s/.../exec" required>
+    <div class="dialog-actions">
+      <button type="button" id="cancelSettings">Cancel</button>
+      <button type="submit" class="submit-btn" style="margin-top:0;width:auto;">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="overview.js"></script>
+</body>
+</html>
