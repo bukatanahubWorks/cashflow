@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BukatanaHUB — Log Cash Flow</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Bukatana<span>HUB</span></div>
+  <nav>
+    <a href="index.html" class="active">Log</a>
+    <a href="overview.html">Overview</a>
+    <button id="settingsBtn" class="icon-btn" title="Data source settings" type="button">⚙</button>
+  </nav>
+</header>
+
+<main class="page">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="transaction" type="button">Cash In / Out</button>
+    <button class="tab-btn" data-tab="transfer" type="button">Transfer Between People</button>
+  </div>
+
+  <section id="transaction" class="tab-panel active card">
+    <form id="txForm">
+      <label class="field-label">Type</label>
+      <div class="segmented" id="typeToggle">
+        <button type="button" class="seg-btn in active" data-value="Cash In">Cash In</button>
+        <button type="button" class="seg-btn out" data-value="Cash Out">Cash Out</button>
+      </div>
+
+      <label class="field-label" for="txPerson">Who</label>
+      <select id="txPerson" required></select>
+
+      <label class="field-label" for="txAmount">Amount</label>
+      <input type="number" id="txAmount" min="0" step="1" placeholder="0" required>
+
+      <label class="field-label" for="txDate">Date</label>
+      <input type="date" id="txDate" required>
+
+      <div id="eventOutBlock">
+        <label class="field-label">Related to</label>
+        <div class="segmented" id="eventToggle">
+          <button type="button" class="seg-btn active" data-value="General">General</button>
+          <button type="button" class="seg-btn" data-value="Event">Event ID</button>
+        </div>
+      </div>
+
+      <div id="eventIdBlock" class="hidden">
+        <label class="field-label" for="txEventId">Event</label>
+        <select id="txEventId"></select>
+        <input type="text" id="txNewEventName" class="hidden" placeholder="New event name" style="margin-top:8px;">
+      </div>
+
+      <div id="eventInBlock" class="hidden">
+        <label class="field-label" for="txEventIdIn">Event <span class="muted">(leave as "— None —" if not tied to an event)</span></label>
+        <select id="txEventIdIn"></select>
+        <input type="text" id="txNewEventNameIn" class="hidden" placeholder="New event name" style="margin-top:8px;">
+      </div>
+
+      <div id="categoryBlock" class="hidden">
+        <label class="field-label" for="txCategory">Expense Category</label>
+        <select id="txCategory"></select>
+      </div>
+
+      <label class="field-label" for="txNotes">Notes <span class="muted">(optional)</span></label>
+      <input type="text" id="txNotes" placeholder="Short note">
+
+      <button type="submit" class="submit-btn">Save Transaction</button>
+    </form>
+  </section>
+
+  <section id="transfer" class="tab-panel card">
+    <form id="trForm">
+      <label class="field-label" for="trFrom">From</label>
+      <select id="trFrom" required></select>
+
+      <label class="field-label" for="trTo">To</label>
+      <select id="trTo" required></select>
+
+      <label class="field-label" for="trAmount">Amount</label>
+      <input type="number" id="trAmount" min="0" step="1" placeholder="0" required>
+
+      <label class="field-label" for="trDate">Date</label>
+      <input type="date" id="trDate" required>
+
+      <label class="field-label" for="trNotes">Notes <span class="muted">(optional)</span></label>
+      <input type="text" id="trNotes" placeholder="Short note">
+
+      <button type="submit" class="submit-btn">Save Transfer</button>
+    </form>
+  </section>
+</main>
+
+<dialog id="settingsDialog">
+  <form id="settingsForm">
+    <h3>Connect your Google Sheet</h3>
+    <p class="muted">Paste the Web App URL from your Apps Script deployment (see README).</p>
+    <input type="url" id="apiUrlInput" placeholder="https://script.google.com/macros/s/.../exec" required>
+    <div class="dialog-actions">
+      <button type="button" id="cancelSettings">Cancel</button>
+      <button type="submit" class="submit-btn" style="margin-top:0;width:auto;">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="log.js"></script>
+</body>
+</html>
